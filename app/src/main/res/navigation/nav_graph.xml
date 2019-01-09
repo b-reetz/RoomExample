@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            app:startDestination="@id/wordListFragment2">
+
+    <fragment android:id="@+id/wordListFragment2"
+              android:name="com.recipeapp.brendanreetz.roomwordssample.WordListFragment"
+              android:label="WordListFragment">
+        <action android:id="@+id/action_wordListFragment2_to_newWordFragment2" app:destination="@id/newWordFragment2"/>
+    </fragment>
+    <fragment android:id="@+id/newWordFragment2"
+              android:name="com.recipeapp.brendanreetz.roomwordssample.NewWordFragment"
+              android:label="NewWordFragment"/>
+</navigation>
