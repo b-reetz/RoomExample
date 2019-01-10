@@ -1,11 +1,9 @@
 package com.recipeapp.brendanreetz.roomwordssample.data.db
 
 import android.app.Application
-import android.os.AsyncTask
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.recipeapp.brendanreetz.roomwordssample.data.db.dao.WordDao
 import com.recipeapp.brendanreetz.roomwordssample.data.db.models.Word
 
@@ -24,9 +22,10 @@ abstract class WordRoomDatabase : RoomDatabase() {
                         INSTANCE = Room.databaseBuilder(
                             application.applicationContext,
                             WordRoomDatabase::class.java, "word_database"
-                        )
-                            .fallbackToDestructiveMigration()
-                            .addCallback(roomDatabaseCallback)
+                        )   // remove fallback, as we don't want to destroy database every time
+//                            .fallbackToDestructiveMigration()
+                                // only use if you want to populate database once built
+//                            .addCallback(roomDatabaseCallback)
                             .build()
                     }
                 }
@@ -34,9 +33,10 @@ abstract class WordRoomDatabase : RoomDatabase() {
             return INSTANCE!!
         }
 
-        private val roomDatabaseCallback: RoomDatabase.Callback = object : RoomDatabase.Callback() {
+/*        private val roomDatabaseCallback: RoomDatabase.Callback = object : RoomDatabase.Callback() {
             override fun onOpen(db: SupportSQLiteDatabase) {
                 super.onOpen(db)
+                // Remove once done testing
                 PopulateDbAsync(INSTANCE!!).execute()
             }
         }
@@ -49,6 +49,6 @@ abstract class WordRoomDatabase : RoomDatabase() {
                 words.forEach { db.wordDao().insert(Word(word = it)) }
                 return null
             }
-        }
+        }*/
     }
 }

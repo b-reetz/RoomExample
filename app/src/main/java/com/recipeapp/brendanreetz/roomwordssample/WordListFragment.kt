@@ -8,35 +8,37 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.recipeapp.brendanreetz.roomwordssample.R.id.newWordFragment2
+import com.recipeapp.brendanreetz.roomwordssample.R.layout.fragment_word_list
 import com.recipeapp.brendanreetz.roomwordssample.data.db.models.Word
 import kotlinx.android.synthetic.main.fragment_word_list.view.*
 
 class WordListFragment : androidx.fragment.app.Fragment() {
 
-    private lateinit var wordListAdapter: WordListAdapter
-    private lateinit var wordViewModel: WordViewModel
+    private val wordViewModel: WordViewModel by lazy {
+        ViewModelProviders.of(activity!!).get(WordViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        val view = inflater.inflate(R.layout.fragment_word_list, container, false)
+        val view = inflater.inflate(fragment_word_list, container, false)
+        view.fab.setOnClickListener(Navigation.createNavigateOnClickListener(newWordFragment2))
 
-        view.fab.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.newWordFragment2))
 
-        if (view.id == R.id.fragment_base_layout) {
-            wordListAdapter = WordListAdapter(context!!)
+        val wordListAdapter = WordListAdapter()
+        wordViewModel.allWords.observe(
+            this,
+            Observer<List<Word>> { words -> wordListAdapter.setWords(words) })
 
-            wordViewModel = ViewModelProviders.of(this).get(WordViewModel::class.java)
-            wordViewModel.allWords.observe(this, Observer<List<Word>> { words -> wordListAdapter.setWords(words) })
+        view.recycler_view?.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = wordListAdapter
 
-            view.recycler_view.apply {
-                layoutManager = LinearLayoutManager(context)
-                adapter = wordListAdapter
-
-            }
         }
+
         return view
     }
 }
