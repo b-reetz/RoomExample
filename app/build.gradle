@@ -45,10 +45,11 @@ dependencies {
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
 
     // navigation
-
-
     implementation "android.arch.navigation:navigation-fragment-ktx:$rootProject.nav_version"
     implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.nav_version"
+
+    // dependency injection
+    implementation "org.koin:koin-android-viewmodel:$rootProject.koin_version"
 
     // testing
     testImplementation 'junit:junit:4.12'

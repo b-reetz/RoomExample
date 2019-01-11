@@ -5,19 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.recipeapp.brendanreetz.roomwordssample.R.id.newWordFragment2
 import com.recipeapp.brendanreetz.roomwordssample.R.layout.fragment_word_list
 import com.recipeapp.brendanreetz.roomwordssample.data.db.models.Word
 import kotlinx.android.synthetic.main.fragment_word_list.view.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class WordListFragment : androidx.fragment.app.Fragment() {
 
-    private val wordViewModel: WordViewModel by lazy {
-        ViewModelProviders.of(activity!!).get(WordViewModel::class.java)
-    }
+    private val wordViewModel: WordViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +24,6 @@ class WordListFragment : androidx.fragment.app.Fragment() {
 
         val view = inflater.inflate(fragment_word_list, container, false)
         view.fab.setOnClickListener(Navigation.createNavigateOnClickListener(newWordFragment2))
-
 
         val wordListAdapter = WordListAdapter()
         wordViewModel.allWords.observe(
@@ -38,7 +35,6 @@ class WordListFragment : androidx.fragment.app.Fragment() {
             adapter = wordListAdapter
 
         }
-
         return view
     }
 }

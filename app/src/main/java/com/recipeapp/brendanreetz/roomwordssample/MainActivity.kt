@@ -7,6 +7,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.recipeapp.brendanreetz.roomwordssample.R.layout.activity_main
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.startKoin
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(activity_main)
         setSupportActionBar(toolbar)
+
+        startKoin(this, listOf(appModule))
 
         setupActionBarWithNavController(navConfiguration, appBarConfiguration)
     }

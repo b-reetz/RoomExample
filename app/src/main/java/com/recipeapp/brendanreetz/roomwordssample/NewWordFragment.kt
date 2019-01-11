@@ -5,18 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.recipeapp.brendanreetz.roomwordssample.R.layout.fragment_new_word
 import com.recipeapp.brendanreetz.roomwordssample.data.db.models.Word
 import kotlinx.android.synthetic.main.fragment_new_word.*
 import kotlinx.android.synthetic.main.fragment_new_word.view.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class NewWordFragment : androidx.fragment.app.Fragment() {
 
-    private val wordViewModel: WordViewModel by lazy {
-        ViewModelProviders.of(activity!!).get(WordViewModel::class.java)
-    }
+    private val wordViewModel: WordViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
