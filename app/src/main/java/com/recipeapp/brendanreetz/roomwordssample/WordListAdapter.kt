@@ -11,12 +11,12 @@ import kotlinx.android.synthetic.main.recycler_view_item.view.*
 
 class WordListAdapter : RecyclerView.Adapter<WordListAdapter.WordViewHolder>() {
 
-    private var listOfWords: List<Word> = emptyList()
+    private var listOfWords = emptyList<Word>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         WordViewHolder(LayoutInflater.from(parent.context).inflate(recycler_view_item, parent, false))
 
-    override fun getItemCount(): Int = listOfWords.size
+    override fun getItemCount() = listOfWords.size
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         holder.textView.text = listOfWords[position].word

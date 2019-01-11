@@ -11,6 +11,7 @@ val appModule = module {
     single { Room.databaseBuilder(get(), WordRoomDatabase::class.java, "word_database").build() }
     single { get<WordRoomDatabase>().wordDao() }
     single { WordRepository(get()) }
+    single { MainActivity() }
 
     viewModel { WordViewModel(get()) }
 }

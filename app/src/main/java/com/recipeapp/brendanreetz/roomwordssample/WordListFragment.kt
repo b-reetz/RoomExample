@@ -15,7 +15,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class WordListFragment : androidx.fragment.app.Fragment() {
 
-    private val wordViewModel: WordViewModel by sharedViewModel()
+    private val wordViewModel by sharedViewModel<WordViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
